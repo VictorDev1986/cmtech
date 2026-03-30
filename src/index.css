@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap');
+
+:root {
+  --text: #10131a;
+  --text-h: #0a0b10;
+  --muted: rgba(16, 19, 26, 0.55);
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-strong: #ffffff;
+  --border: rgba(16, 19, 26, 0.12);
+  --accent: #f5c542;
+  --accent-dark: #eab308;
+  --shadow: 0 20px 40px rgba(15, 20, 40, 0.08);
+  --shadow-soft: 0 14px 24px rgba(10, 14, 30, 0.08);
+  --glow: 0 12px 24px rgba(17, 19, 26, 0.2);
+
+  --sans: 'Assistant', 'Helvetica Neue', Arial, sans-serif;
+  --heading: 'Rajdhani', 'Helvetica Neue', Arial, sans-serif;
+
+  font: 16px/160% var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+#root {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 900px) {
+  #root {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  #root {
+    padding: 0 16px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--heading);
+  color: var(--text-h);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+input,
+button {
+  font-family: inherit;
+}
