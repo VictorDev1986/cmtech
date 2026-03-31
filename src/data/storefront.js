@@ -205,7 +205,7 @@ export const highlights = [
   { title: 'Envios hasta en 24h', subtitle: 'Bogota D.C.' },
   { title: 'Garantias fabricante', subtitle: '1 y 2 anos' },
   { title: 'Politicas y devoluciones', subtitle: 'Segun terminos' },
-  { title: 'WhatsApp 319 708 9082', subtitle: 'Asesoramos tu compra' },
+  { title: 'WhatsApp 324 602 5577', subtitle: 'Asesoramos tu compra' },
   { title: 'Promos nuevas', subtitle: 'Cada semana' },
 ]
 

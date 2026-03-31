@@ -64,3 +64,43 @@ Formato:
 npm install
 npm run dev
 ```
+
+## Chatbot (respuestas predefinidas)
+
+El chatbot ahora responde con reglas simples (sin backend).
+
+Edita las respuestas en:
+
+`src/data/chatbot-responses.js`
+
+## Guardar chats en Google Sheets (gratis)
+
+1) Crea una hoja en Google Sheets.
+2) Ve a **Extensiones > Apps Script** y pega este codigo:
+
+```
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const data = JSON.parse(e.postData.contents || '{}');
+  sheet.appendRow([
+    new Date(),
+    data.role || '',
+    data.message || '',
+    data.page || ''
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({ ok: true }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+```
+
+3) En Apps Script: **Deploy > New deployment > Web app**
+   - Execute as: **Me**
+   - Who has access: **Anyone**
+4) Copia el URL del Web App.
+5) Agrega en tu `.env`:
+
+```
+VITE_SHEETS_WEBHOOK=URL_DEL_WEB_APP
+```
+
+6) Reinicia `npm run dev`.

@@ -145,7 +145,7 @@ function App() {
   const addToCart = (item) => {
     if (item.type === 'servicio') {
       const message = `Hola! Quiero informacion sobre el servicio: ${item.name}.`
-      const url = `https://wa.me/573197089082?text=${encodeURIComponent(message)}`
+      const url = `https://wa.me/573246025577?text=${encodeURIComponent(message)}`
       window.open(url, '_blank')
       return
     }
@@ -196,7 +196,7 @@ function App() {
     const message = `Hola! Quiero finalizar la compra:%0A${lines.join(
       '%0A'
     )}%0ASubtotal: ${subtotal}`
-    window.open(`https://wa.me/573197089082?text=${message}`, '_blank')
+    window.open(`https://wa.me/573246025577?text=${message}`, '_blank')
   }
 
   const handleViewItem = (item) => {

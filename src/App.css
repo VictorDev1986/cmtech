@@ -1209,6 +1209,13 @@
   background: #f4f6fb;
   color: #11131a;
   font-size: 13px;
+  width: fit-content;
+  max-width: 85%;
+}
+
+.chat-message.user {
+  background: rgba(245, 197, 66, 0.25);
+  margin-left: auto;
 }
 
 .chat-quick {
@@ -1225,6 +1232,7 @@
   font-size: 12px;
   cursor: pointer;
 }
+
 
 .chat-input {
   display: flex;
