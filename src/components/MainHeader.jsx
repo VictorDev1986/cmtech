@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import logo from '../assets/CM-Tech1-1.png'
 
 const MainHeader = ({
@@ -11,15 +12,11 @@ const MainHeader = ({
 }) => {
   return (
     <header className="main-header">
-      <div className="brand">
+      <Link className="brand" to="/">
         <div className="logo-mark image">
           <img src={logo} alt="CM-Tech" />
         </div>
-        <div>
-          <strong>{brand.name}</strong>
-          <span>{brand.tagline}</span>
-        </div>
-      </div>
+      </Link>
       {showSearch ? (
         <form
           className="search"

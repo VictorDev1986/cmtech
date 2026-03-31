@@ -1,9 +1,20 @@
-import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
 import CatalogSection from '../components/CatalogSection'
 
 const CategoryPage = ({ categories, items, onAction, onCategorySelect, searchQuery }) => {
   const { slug } = useParams()
+  const location = useLocation()
   const category = categories.find((item) => item.slug === slug)
+
+  useEffect(() => {
+    if (!location.hash) return
+    const id = location.hash.replace('#', '')
+    const target = document.getElementById(id)
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [location.hash])
 
   if (!category) {
     return (

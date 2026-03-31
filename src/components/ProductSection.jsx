@@ -14,7 +14,11 @@ const ProductSection = ({
       </div>
       <div className="product-grid">
         {products.map((product) => (
-          <article className="product-card" key={product.id || product.name}>
+          <article
+            className="product-card"
+            key={product.id || product.name}
+            id={product.id ? `item-${product.id}` : undefined}
+          >
             <div className="product-image">
               <img src={product.image} alt={product.name} />
             </div>

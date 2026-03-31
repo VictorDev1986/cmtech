@@ -65,7 +65,11 @@ const CatalogSection = ({
 
       <div className="product-grid">
         {visible.map((item) => (
-          <article className="product-card" key={item.id}>
+          <article
+            className="product-card"
+            key={item.id}
+            id={item.id ? `item-${item.id}` : undefined}
+          >
             <div className="product-image">
               <img src={item.image} alt={item.name} />
             </div>

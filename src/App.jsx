@@ -1,7 +1,10 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import './App.css'
 import CartDrawer from './components/CartDrawer'
+import PromoToast from './components/PromoToast'
+import LoadingOverlay from './components/LoadingOverlay'
+import ChatWidget from './components/ChatWidget'
 import StoreLayout from './components/StoreLayout'
 import HomePage from './pages/HomePage'
 import CategoryPage from './pages/CategoryPage'
@@ -13,6 +16,7 @@ import {
   categories,
   heroSlides,
   highlights,
+  serviceBanners,
   brandMarquee,
   catalogItems,
   featuredProducts,
@@ -27,8 +31,15 @@ function App() {
   const [query, setQuery] = useState('')
   const [cartItems, setCartItems] = useState([])
   const [cartOpen, setCartOpen] = useState(false)
+  const [promoOpen, setPromoOpen] = useState(false)
+  const [promoItem, setPromoItem] = useState(null)
+  const [pageLoading, setPageLoading] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
+  const promoTimeout = useRef(null)
+  const lastPromo = useRef(0)
+  const promoOpenRef = useRef(false)
+  const firstLoad = useRef(true)
 
   useEffect(() => {
     const saved = localStorage.getItem('cmtech-cart')
@@ -55,10 +66,62 @@ function App() {
     [newArrivals]
   )
 
+  const promoPool = useMemo(() => {
+    const regex = /(oferta|promo|top)/i
+    const pool = catalogItems.filter((item) => regex.test(item.badge || ''))
+    return pool.length ? pool : catalogItems
+  }, [catalogItems])
+
   useEffect(() => {
     const match = location.pathname.match(/^\/categoria\/([^/]+)/)
     setActiveCategory(match ? match[1] : 'all')
   }, [location.pathname])
+
+  useEffect(() => {
+    if (firstLoad.current) {
+      firstLoad.current = false
+      return
+    }
+    setPageLoading(true)
+    const timeout = setTimeout(() => setPageLoading(false), 600)
+    return () => clearTimeout(timeout)
+  }, [location.pathname])
+
+  useEffect(() => {
+    promoOpenRef.current = promoOpen
+  }, [promoOpen])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const now = Date.now()
+      if (promoOpenRef.current) return
+      if (now - lastPromo.current < 15000) return
+      if (!promoPool.length) return
+
+      const randomItem = promoPool[Math.floor(Math.random() * promoPool.length)]
+      setPromoItem(randomItem)
+      setPromoOpen(true)
+      lastPromo.current = now
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [promoPool])
+
+  useEffect(() => {
+    if (!promoOpen) return
+    if (promoTimeout.current) {
+      clearTimeout(promoTimeout.current)
+    }
+    promoTimeout.current = setTimeout(() => {
+      setPromoOpen(false)
+    }, 5000)
+    return () => {
+      clearTimeout(promoTimeout.current)
+    }
+  }, [promoOpen])
 
   const handleCategorySelect = (slug) => {
     if (slug === 'all') {
@@ -136,6 +199,15 @@ function App() {
     window.open(`https://wa.me/573197089082?text=${message}`, '_blank')
   }
 
+  const handleViewItem = (item) => {
+    if (item?.category && item?.id) {
+      navigate(`/categoria/${item.category}#item-${item.id}`)
+      setPromoOpen(false)
+      return
+    }
+    navigate('/')
+  }
+
   return (
     <>
       <Routes>
@@ -166,6 +238,7 @@ function App() {
                 heroSlides={heroSlides}
                 highlights={highlights}
                 brandMarquee={brandMarquee}
+                serviceBanners={serviceBanners}
                 categories={categories}
                 featuredProducts={featuredList}
                 newArrivals={newArrivalsList}
@@ -203,6 +276,26 @@ function App() {
         onRemove={removeItem}
         onCheckout={handleCheckout}
       />
+      <PromoToast
+        item={promoItem}
+        visible={promoOpen}
+        onView={handleViewItem}
+        onClose={() => setPromoOpen(false)}
+      />
+      <ChatWidget />
+      <a
+        className="whatsapp-float"
+        href="https://wa.me/573246025577"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Contactar por WhatsApp"
+      >
+        <img
+          src="https://cdn.simpleicons.org/whatsapp/ffffff"
+          alt="WhatsApp"
+        />
+      </a>
+      <LoadingOverlay show={pageLoading} />
     </>
   )
 }

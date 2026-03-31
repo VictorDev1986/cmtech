@@ -1,6 +1,7 @@
 import HeroSlider from '../components/HeroSlider'
 import HighlightStrip from '../components/HighlightStrip'
 import BrandSlider from '../components/BrandSlider'
+import ServiceBanners from '../components/ServiceBanners'
 import CategoryGrid from '../components/CategoryGrid'
 import ProductSection from '../components/ProductSection'
 import PromoBanners from '../components/PromoBanners'
@@ -11,6 +12,7 @@ const HomePage = ({
   heroSlides,
   highlights,
   brandMarquee,
+  serviceBanners,
   categories,
   featuredProducts,
   newArrivals,
@@ -53,6 +55,7 @@ const HomePage = ({
         activeCategory={activeCategory}
         onSelect={onCategorySelect}
       />
+      <ServiceBanners items={serviceBanners} onAction={onAction} />
       <ProductSection
         title="Productos destacados"
         subtitle="Ofertas con stock limitado y entrega rapida."

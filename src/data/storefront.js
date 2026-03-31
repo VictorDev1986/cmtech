@@ -209,6 +209,27 @@ export const highlights = [
   { title: 'Promos nuevas', subtitle: 'Cada semana' },
 ]
 
+export const serviceBanners = [
+  {
+    title: 'Soporte TI empresarial',
+    subtitle: 'Mesa de ayuda, redes, servidores y seguridad.',
+    description:
+      'Atencion remota y en sitio, mantenimiento correctivo y preventivo, licencias y monitoreo 24/7.',
+    cta: 'Solicitar soporte',
+    image:
+      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    title: 'Desarrollo web',
+    subtitle: 'Paginas web, ecommerce y software a la medida.',
+    description:
+      'Diseno profesional, SEO, integraciones y soporte continuo para que vendas mas.',
+    cta: 'Cotizar proyecto',
+    image:
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80',
+  },
+]
+
 export const brandMarquee = [
   {
     name: 'Windows',

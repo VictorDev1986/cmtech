@@ -88,6 +88,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
+  color: inherit;
 }
 
 .logo-mark {
@@ -495,6 +497,105 @@
   overflow: hidden;
 }
 
+.service-banners {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.service-banner {
+  position: relative;
+  display: grid;
+  align-items: center;
+  background: #eef3f8;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.service-banner-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 10px;
+  padding: 28px 28px 28px 32px;
+  max-width: 60%;
+}
+
+.service-label {
+  display: inline-flex;
+  width: fit-content;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.service-banner h3 {
+  margin: 0;
+  font-size: 26px;
+  color: #fff;
+}
+
+.service-subtitle {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+}
+
+.service-description {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.service-banner-content button {
+  width: fit-content;
+  border: none;
+  background: var(--accent);
+  color: #11131a;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-banner-content button:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+}
+
+.service-banner-media {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.service-banner-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.service-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.55) 45%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  z-index: 1;
+}
+
 .brand-track {
   overflow: hidden;
 }
@@ -854,6 +955,347 @@
   cursor: not-allowed;
 }
 
+.promo-toast {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: 320px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 12px;
+  padding: 12px;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 60;
+}
+
+.promo-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.promo-thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f1f3f9;
+}
+
+.promo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.promo-content {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.promo-content strong {
+  color: var(--text-h);
+  font-size: 15px;
+}
+
+.promo-content p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.promo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.promo-close {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--text-h);
+}
+
+.promo-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(245, 197, 66, 0.25);
+  color: #11131a;
+  font-weight: 600;
+}
+
+
+.promo-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.promo-footer button {
+  border: none;
+  background: var(--accent);
+  color: #11131a;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.page-loading {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 120;
+}
+
+.page-loading.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.page-loading-content {
+  display: grid;
+  place-items: center;
+  gap: 10px;
+}
+
+.page-loading-content img {
+  width: 160px;
+  height: auto;
+  object-fit: contain;
+  animation: logo-pulse 1.4s ease-in-out infinite;
+}
+
+.page-loading-content span {
+  font-size: 14px;
+  color: var(--text-h);
+  letter-spacing: 0.6px;
+}
+
+.whatsapp-float {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  background: #25d366;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  box-shadow: var(--shadow-soft);
+  z-index: 70;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-float svg {
+  width: 28px;
+  height: 28px;
+}
+
+.whatsapp-float img {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.chat-widget {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 80;
+}
+
+.chat-toggle {
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: #11131a;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chat-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.chat-panel {
+  position: absolute;
+  right: 0;
+  bottom: 68px;
+  width: 320px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  overflow: hidden;
+}
+
+.chat-widget.open .chat-panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: #11131a;
+  color: #fff;
+}
+
+.chat-header span {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.chat-header button {
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.chat-body {
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+  max-height: 260px;
+  overflow: auto;
+}
+
+.chat-message {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #f4f6fb;
+  color: #11131a;
+  font-size: 13px;
+}
+
+.chat-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chat-quick button {
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.chat-input {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+}
+
+.chat-input input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.chat-input button {
+  border: none;
+  background: var(--accent);
+  color: #11131a;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .chat-widget {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .chat-panel {
+    width: 92vw;
+    max-height: 70vh;
+  }
+
+  .chat-body {
+    max-height: 45vh;
+  }
+}
+
+@media (max-width: 720px) {
+  .whatsapp-float {
+    width: 48px;
+    height: 48px;
+    left: 12px;
+    bottom: 12px;
+  }
+}
+
+@keyframes logo-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .promo-toast {
+    left: 12px;
+    right: 12px;
+    width: auto;
+  }
+}
+
 .catalog-section {
   display: grid;
   gap: 16px;
@@ -986,6 +1428,18 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .service-banner {
+    min-height: 200px;
+  }
+
+  .service-banner-content {
+    max-width: 80%;
+  }
+
+  .service-banners {
+    grid-template-columns: 1fr;
+  }
+
   .category-grid .grid,
   .product-grid,
   .promo-banners {
@@ -1074,6 +1528,19 @@
     width: 100%;
     padding: 8px 10px;
     font-size: 12px;
+  }
+
+  .service-banner {
+    min-height: 200px;
+  }
+
+  .service-banner-media {
+    height: auto;
+  }
+
+  .service-banner-content {
+    max-width: 100%;
+    padding: 20px;
   }
 
   .utility-bar {
